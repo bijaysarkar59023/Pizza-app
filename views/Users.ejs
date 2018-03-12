@@ -1,0 +1,25 @@
+<% include ./partials/header %>
+<div class="container" style="padding-top:60px">
+ <h1>Users Table</h1>
+<table class="table">
+ <thead>
+      <tr>
+        <th>ID Number</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <% Users.forEach(function(user){ %>
+    <tbody>
+     <tr>
+        <td><%= user._id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.phone %></td>
+        <td><%= user.email %></td>
+      </tr>
+    </tbody>
+    <% }) %>
+</table>
+</div>
+<% include ./partials/footer %>

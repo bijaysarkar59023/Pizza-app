@@ -1,0 +1,65 @@
+<% include ./partials/header %>
+  <section class="container">
+  <!--<div class="jumbotron">-->
+   <div class="row text-center" style="display:flex; flex-wrap:wrap;padding:40px 0;">
+    <% meals.forEach(function(meal){ %>
+     <div class="col-sm-6 col-md-6 col-lg-4 left-margin">
+        <!--<div class="thumbnail">-->
+            <img style="margin-top:30px;" src="<%= meal.img%>"></img>
+            <div class="caption">
+                <h4 style="text-align:center"><%= meal.name %></h4>
+                <P style="height:20px;font-size:12px;"><%= meal.desc %></P>
+                <div style="display:flex; justify-content:center;align-items:center">
+                  <h2 style="margin-right:30px">&#8377; <%= meal.price %></h2>
+                  <button class="btn  btn-danger" href="/<%= meal._id %>/bye" data-toggle="modal" data-target="#<%=meal.id%>">Bye Now</button>
+                  <!--<a href="/meals/<%= meal._id %>/edit">edit</a>-->
+                </div>
+            </div>
+            <!--=====================-->
+            <!--Bye Pizza modal-->
+            <!--=====================--> 
+            <div class="modal fade" id="<%=meal.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-body" style="padding:0 0">
+                   <form action="/go" method="post">
+                   <div class="order-image">
+                    <img style="margin-top:30px;" src="<%= meal.img%>"></img>
+                   </div>
+                   <div class="row">
+                    <div class="col-md-12 ">
+                     <h2 style="text-align:center"><%= meal.name %></h2>
+                    </div>
+                    <div class="col-md-6">
+                     <div class="form-group" style="margin-left:20px;">
+                       <label>Address</label>
+                       <textarea rows="6" class="form-control" name="[process]"></textarea>
+                     </div>
+                     <div class="form-group" style="margin-left:20px;">
+                      <input class="form-control" type="number" placeholder="Enter ZIP Code" ></input>
+                     </div>
+                    </div>
+                    <div class="col-md-6">
+                      <h2 style="margin-right:30px">&#8377; <%= meal.price %></h2>
+                      <div class="thumbnail">
+                       <h4>Select payment option</h4>
+                       <div class="checkbox">
+                         <label><input type="checkbox" value="" required>Cash on delivery</label>
+                       </div>
+                      </div>
+                      <button class="btn btn-lg btn-danger">Check Out</button>
+                    </div>
+                   </div>
+                   </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!--</div>-->
+     </div>
+    <% }) %>
+   </div>
+ <!--</div>-->
+ </section>
+
+<% include ./partials/footer %>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PizzaKhana</title>
+	<link rel="stylesheet" type="text/css" href="./stylesheets/app.css"></link>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style type="text/css">
+   .navbar{
+   	padding-top: 10px;
+   	padding-bottom: 10px;
+   }
+		nav .navbar-brand{
+			color: #fff;
+		}
+		.navbar a{
+			color:#fff;
+		}
+		.navbar p{
+			display: inline-block;
+			margin: 0;
+			line-height: 20px;
+			text-transform: uppercase;
+			font-size: 12px;
+			padding-left: 5px;
+		}
+		.navbar a{
+			margin-left: 10px;
+		}
+		
+		.left-modal{
+			height:600px;
+			background: blue;
+		}
+		.right-modal{
+			height:600px;
+			background:#fff;
+		}
+		.modal-body{
+			padding: 0 15px;
+			width:100%;
+		}
+		.modal-content{
+			margin-left: -100px;
+			width: 50vw;
+			height: 600px;
+		}
+		.left-content{
+			color:#fff;
+			padding-top: 50px;
+			padding-left: 20px;
+		}
+		.left-content p{
+			font-size: 18px;
+			padding-top: 20px;
+			/*font-weight: bold;*/
+		}
+		.left-content img{
+			padding-top: 140px;
+			width: 90%;
+		}
+		.right-content{
+			padding-top: 80px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		.right-content .btn{
+			margin-bottom: 20px;
+			/*color:#fff;*/
+			width: 100%;
+		}
+		.btn.btn-warning{
+			color:#fff;
+		}
+		.btn.btn-default{
+			color:blue;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
+    <div class="navbar-translate">
+        <a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit/index.html" rel="tooltip" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" target="_blank">
+            PizzaKhana
+        </a>
+    </div>
+    <div class="collapse navbar-collapse">
+    		<ul class="nav navbar-nav">
+    			<li><a href="/">Pizza</a></li>
+    			<li class="active"><a href="/meals">Meals</a></li>
+    			<li><a href="/drinks">Drinks</a></li>
+    		</ul>
+  		</div>
+    <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="./assets/img/blurred-image-1.jpg">
+        <ul class="navbar-nav">
+         <%  if(!currentUser){ %>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()" data-toggle="modal" data-target="#1234">
+              <i class="fa fa-user-plus" ></i>
+              <p>login & signup</p>
+            </a>
+          </li>
+         <%  }else{ %>
+            <li><a><%= currentUser.username %></a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="./documentation/tutorial-components.html" target="_blank">
+                <i class="fa fa-sign-out"></i>
+                <p>Logout</p>
+              </a>
+            </li>
+            <% } %>
+            <li class="nav-item">
+              <a class="nav-link btn btn-neutral" href="/manage" target="_blank">
+                <i class="fa fa-user"></i>
+                <p>Manage</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank">
+                <i class="fa fa-twitter"></i>
+                <p class="d-lg-none d-xl-none">Twitter</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" rel="tooltip" title="Like us on Facebook" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank">
+                <i class="fa fa-facebook-square"></i>
+                <p class="d-lg-none d-xl-none">Facebook</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" rel="tooltip" title="Follow us on Instagram" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank">
+                <i class="fa fa-instagram"></i>
+                <p class="d-lg-none d-xl-none">Instagram</p>
+              </a>
+            </li>
+        </ul>
+    </div>
+	</nav>
+
+
+<!-- Modal -->
+<div class="modal fade" id="1234" tabindex="-1" role="dialog" aria-labelledby="lab" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+        	<div class="col-md-5 col-sm-5 left-modal">
+        	  <div class="left-content">
+        	  	<h2>Login</h2>
+        	  	<p>Get connected to your friends and folowers</p>
+        	  	<img src="https://png.icons8.com/ios/1600/partly-cloudy-rain.png">
+        	  </div>
+        	</div>
+        	<div class="col-md-7 col-sm-7 right-modal">
+        	  <div class="right-content">
+        	  	<form action="/auth/login" method="POST">
+        	  	  <div class="form-group">
+      				      <label for="email">Username:</label>
+      				      <input type="text" class="form-control"name="username" placeholder="Enter Username">
+      				    </div>
+      				    <div class="form-group">
+      				      <label for="email">Password:</label>
+      				      <input type="password" class="form-control" name="password" placeholder="Enter Password">
+      				    </div>
+      				    <button type="submit" class="btn btn-warning">Login</button>	
+				          <button data-dismiss="modal" type="submit" class="btn btn-default" data-toggle="modal" data-target="#exampleModal2">New to Filter? Sign up</button>
+        	  	</form>
+        	  </div>
+        	</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div  class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+        	<div class="col-md-5 col-sm-5 left-modal">
+        	  <div class="left-content">
+        	  	<h2>Signup</h2>
+        	  	<p>We do not share your personal data with anyone</p>
+        	  	<img src="https://png.icons8.com/ios/1600/partly-cloudy-rain.png">
+        	  </div>
+        	</div>
+        	<div class="col-md-7 col-sm-7 right-modal">
+        	  <div class="right-content">
+        	  	<form action="/auth/register" method="POST">
+        	  	  <div class="form-group">
+        				    <label for="email">Name:</label>
+        				    <input type="text" class="form-control" name="name" placeholder="Enter Your name">
+        				  </div>
+        	  	  <div class="form-group">
+        				    <label for="email">Username:</label>
+        				    <input type="text" class="form-control" name="username" placeholder="Enter Username">
+        				  </div>
+        				  <div class="form-group">
+        				    <label for="email">Email:</label>
+        				    <input type="email" class="form-control" name="email" placeholder="Enter Your Email">
+        				  </div>
+        				  <div class="form-group">
+        				    <label for="phone">Phone:</label>
+        				    <input type="text" class="form-control" name="phone" placeholder="Enter Mobile No.">
+        				  </div>
+        				  <div class="form-group">
+        				    <label for="email">Password:</label>
+        				    <input type="password" class="form-control" name="password" placeholder="Enter Password">
+        				  </div>
+				          <button type="submit" class="btn btn-warning">Sign up</button>	
+				          <button data-dismiss="modal" type="submit" class="btn btn-default" data-toggle="modal" data-target="#1234">Existing User? Login</button>
+        	  	</form>
+        	  </div>
+        	</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,145 @@
+  <% include ./partials/header%>
+  
+  <section class="container">
+  <!--<div class="jumbotron">-->
+  <div class="row text-center" style="display:flex; flex-wrap:wrap;padding:40px 0;">
+   <% pizzas.forEach(function(pizza){ %>
+    <div class="col-sm-6 col-md-6 col-lg-4 left-margin">
+       <!--<div class="thumbnail">-->
+          <a href="/<%= pizza._id %>">
+           <img style="margin-top:30px;" src="<%= pizza.img%>"></img>
+          </a>
+           <div class="caption">
+               <h4 style="text-align:center"><%= pizza.name %></h4>
+               <P style="height:40px;"><%= pizza.desc %></P>
+               <h5>Size: <%= pizza.size %> | Crust: <%= pizza.crust %></h5>
+               <div style="display:flex; justify-content:center;align-items:center">
+                 <h2 style="margin-right:30px">&#8377; <%= pizza.price %></h2>
+                 <button class="btn  btn-danger" href="/<%= pizza._id %>/bye" data-toggle="modal" data-target="#<%=pizza.id%>">Bye Now</button>
+               </div>
+           </div>
+            <!--=====================-->
+            <!--Bye Pizza modal-->
+            <!--=====================--> 
+            <div class="modal fade" id="<%=pizza.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-body" style="padding:0 0">
+                   <form action="/go" method="post">
+                   <div class="order-image">
+                    <img style="margin-top:30px;" src="<%= pizza.img%>"></img>
+                   </div>
+                   <div class="row">
+                    <div class="col-md-12 ">
+                     <h2 style="text-align:center"><%= pizza.name %></h2>
+                     <h4>Size: <%= pizza.size %> | Crust: <%= pizza.crust %></h4>
+                    </div>
+                    <div class="col-md-6">
+                     <div class="form-group" style="margin-left:20px;">
+                       <label>Address</label>
+                       <textarea rows="6" class="form-control" name="[process]"></textarea>
+                     </div>
+                     <div class="form-group" style="margin-left:20px;">
+                      <input class="form-control" type="number" placeholder="Enter ZIP Code" ></input>
+                     </div>
+                    </div>
+                    <div class="col-md-6">
+                      <h2 style="margin-right:30px">&#8377; <%= pizza.price %></h2>
+                      <div class="thumbnail">
+                       <h4>Select payment option</h4>
+                       <div class="checkbox">
+                         <label><input type="checkbox" value="" required>Cash on delivery</label>
+                       </div>
+                      </div>
+                      <button class="btn btn-lg btn-danger">Check Out</button>
+                    </div>
+                   </div>
+                   </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+       <!--</div>-->
+    </div>
+   <% }) %>
+  </div>
+ <!--</div>-->
+ </section>
+ 
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+        	<div class="col-md-5 col-sm-5 left-modal">
+        	  <div class="left-content">
+        	  	<h2>Login</h2>
+        	  	<p>Get connected to your friends and folowers</p>
+        	  	<img src="https://png.icons8.com/ios/1600/partly-cloudy-rain.png">
+        	  </div>
+        	</div>
+        	<div class="col-md-7 col-sm-7 right-modal">
+        	  <div class="right-content">
+        	  	<form action="/login" method="POST">
+        	  	  <div class="form-group">
+		              <label for="email">Username:</label>
+		              <input type="text" class="form-control" name="username" placeholder="Enter Username">
+				          </div>
+				          <div class="form-group">
+		              <label for="email">Password:</label>
+		              <input type="password" class="form-control" name="password" placeholder="Enter Password">
+				          </div>
+		            <button type="submit" class="btn btn-warning">Login</button>	
+		            <button data-dismiss="modal" type="submit" class="btn btn-default" data-toggle="modal" data-target="#exampleModal2">New to Filter? Sign up</button>
+        	  	</form>
+        	  </div>
+        	</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div  class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+        	<div class="col-md-5 col-sm-5 left-modal">
+        	  <div class="left-content">
+        	  	<h2>Signup</h2>
+        	  	<p>We do not share your personal data with anyone</p>
+        	  	<img src="https://png.icons8.com/ios/1600/partly-cloudy-rain.png">
+        	  </div>
+        	</div>
+        	<div class="col-md-7 col-sm-7 right-modal">
+        	  <div class="right-content">
+        	  	<form action="/register" method="POST">
+        	  	  <div class="form-group">
+        				    <label for="email">Username:</label>
+        				    <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
+        				  </div>
+        				  <div class="form-group">
+        				    <label for="email">Email:</label>
+        				    <input type="email" class="form-control" name="email" placeholder="Enter Your Email" required>
+        				  </div>
+        				  <div class="form-group">
+        				    <label for="phone">Mobile:</label>
+        				    <input type="text" class="form-control" name="phone" placeholder="Enter Mobile No." required>
+        				  </div>
+        				  <div class="form-group">
+        				    <label for="email">Password:</label>
+        				    <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
+        				  </div>
+				          <button type="submit" class="btn btn-warning">Sign up</button>	
+				          <button data-dismiss="modal" type="submit" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">Existing User? Login</button>
+        	  	</form>
+        	  </div>
+        	</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ./partials/footer%>
